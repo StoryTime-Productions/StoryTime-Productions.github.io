@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Map the anchors to their closest div sections
     const sections = Array.from(anchors).map(anchor => anchor.closest("div")); // Get closest div to the anchor, assuming div contains the section
 
+    const navbar = document.getElementById('navbar-default');
+    navbar.classList.add('hidden');
+    
     // Options for the IntersectionObserver
     const observerOptions = {
         root: null, // Use the viewport as the root
@@ -43,6 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     
 });
 
+document.querySelectorAll('#navbar-default .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      toggleNavbar(true); // Call the function when a link is clicked
+    });
+  });
+
 // Function to handle clicks outside the navbar
 function handleOutsideClick(event) {
     const toggleNavbarButton = document.getElementById('toggleNavbarButton');
@@ -53,13 +62,27 @@ function handleOutsideClick(event) {
     }
 }
 
-// Function to toggle the navbar visibility (fade in/out and slide)
-function toggleNavbar() {
+function toggleNavbar(collapse = null) {
     const navbar = document.getElementById('navbar-default');
 
-    // Check if the navbar is currently hidden
-    if (navbar.classList.contains('hidden')) {
-        // Prepare for fade in by setting initial styles
+    // Determine whether to collapse based on the parameter or current state
+    const shouldCollapse = collapse === true || (collapse === null && !navbar.classList.contains('hidden'));
+
+    if (shouldCollapse) {
+        // Collapse: Fade, slide, and hide
+        navbar.classList.add('hidden');
+        navbar.style.opacity = '0'; // Fade out
+        navbar.style.transform = 'translateY(-20px)'; // Slide out
+        navbar.style.maxHeight = '0'; // Collapse height
+
+        // After the transition, hide the navbar completely
+        setTimeout(() => {
+            navbar.style.display = 'none'; // Hide the navbar element after animation
+        }, 300); // Wait for the transition to complete before hiding
+
+        document.removeEventListener('click', handleOutsideClick);
+    } else {
+        // Expand: Prepare for fade in by setting initial styles
         navbar.style.display = 'block';
         navbar.style.opacity = '0';
         navbar.style.transform = 'translateY(-20px)';
@@ -77,18 +100,5 @@ function toggleNavbar() {
         }, 10); // Apply the changes shortly after removing 'hidden' class
 
         document.addEventListener('click', handleOutsideClick);
-    } else {
-        // Fade, slide, and collapse out by resetting styles
-        navbar.classList.add('hidden');
-        navbar.style.opacity = '0'; // Fade out
-        navbar.style.transform = 'translateY(-20px)'; // Slide out
-        navbar.style.maxHeight = '0'; // Collapse height
-
-        // After the transition, hide the navbar completely
-        setTimeout(() => {
-            navbar.style.display = 'none'; // Hide the navbar element after animation
-        }, 300); // Wait for the transition to complete before hiding
-
-        document.removeEventListener('click', handleOutsideClick);
     }
 }
