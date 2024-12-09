@@ -48,9 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.querySelectorAll('#navbar-default .nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      toggleNavbar(true); // Call the function when a link is clicked
+        // Check if the screen width is below a certain threshold (e.g., 768px for mobile/tablet)
+        if (window.innerWidth < 768) {
+            toggleNavbar(true); // Call the function when a link is clicked, only on smaller screens
+        }
     });
-  });
+});
+
 
 // Function to handle clicks outside the navbar
 function handleOutsideClick(event) {
