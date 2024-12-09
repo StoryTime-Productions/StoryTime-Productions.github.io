@@ -1,0 +1,79 @@
+#aboutUsSection {
+	margin-bottom: 5rem;
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+	#aboutUsSection {
+		padding-left: 5rem;
+		padding-right: 5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	#aboutUsSection {
+		padding-left: 8rem;
+		padding-right: 8rem;
+	}
+}
+
+@media (min-width: 1280px) {
+	#aboutUsSection {
+		padding-left: 18rem;
+		padding-right: 18rem;
+		margin-bottom: 15rem;
+	}
+}
+
+#cardRow {
+	display: flex;
+	margin-top: 1rem;
+	flex-direction: column;
+	gap: 1.25rem;
+	height: auto;
+}
+
+.card {
+	background-color: var(--primary);
+	border-radius: 10px;
+	padding: 16px;
+	height: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+@media (min-width: 568px) {
+	.card {
+		width: 70%;
+	}
+}
+
+@media (min-width: 1024px) {
+	#cardRow {
+		flex-direction: row;
+		height: 23rem;
+	}
+}
+
+.cardImage {
+	width: auto;
+	object-fit: cover;
+	border-radius: 5px;
+}
+
+.cardContent {
+	padding-top: 0.5rem;
+	margin: auto;
+}
+
+.cardTitle {
+	font-size: 1.25rem;
+	font-weight: bold;
+	color: white;
+}
+
+.cardDescription {
+	font-size: 0.875rem;
+}

@@ -1,0 +1,105 @@
+:root {
+	--primary: #725976;
+	--primary-light: #eccff0;
+	--primary-dark: #0d0010;
+	--secondary: #d3add9;
+	--secondary-light: #ffffff;
+	--secondary-dark: #5c3c62;
+	--tertiary-light: #ffffff;
+	--tertiary: #b092b5;
+	--tertiary-dark: #3e2643;
+	--surface-light: #867a84;
+	--badge: #8A3057;
+	--surface: #1d141c;
+	--surface-dark: #000000;
+}
+
+body {
+	background-color: var(--surface);
+}
+
+.anchorContainer {
+	position: relative;
+}
+
+.anchor {
+	position: absolute;
+	top: -260px;
+	left: 0px;
+}
+
+footer {
+	background-color: var(--primary);
+	text-align: center;
+	padding: 1.25rem;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+
+h2,
+h4,
+h3,
+a,
+p,
+nav a {
+	color: var(--secondary-light);
+}
+
+#h4 {
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 200;
+	font-style: normal;
+}
+
+
+#h2 {
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 900;
+	font-style: normal;
+	font-size: 60px;
+}
+
+@media only screen and (width: 360px) {
+	#h2 {
+		font-size: 55px;
+	}
+}
+
+@media only screen and (width: 375px) {
+	#h2 {
+		font-size: 50px;
+	}
+}
+
+#h3 {
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 40px;
+}
+
+#tagline {
+	font-family: "Inter", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 20px;
+}
+
+#main {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (min-width: 1024px) {
+	#main {
+		max-width: 110rem;
+	}
+}

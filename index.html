@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+
+      <!-- Styling that applies to all elements -->
+      <link href="./stylesheets/global.css" rel="stylesheet">
+
+      <!-- Styling related to the navigation bar -->
+      <link href="./stylesheets/navbar.css" rel="stylesheet">
+      
+      <!-- Styling related to the "Hero" section -->
+      <link href="./stylesheets/hero.css" rel="stylesheet">
+      
+      <!-- Styling related to the "Portfolio" section -->
+      <link href="./stylesheets/portfolio.css" rel="stylesheet">
+
+      <!-- Styling related to the "Blog" section -->
+      <link href="./stylesheets/blog.css" rel="stylesheet">
+
+      <!-- Styling related to the "About Us" section -->
+      <link href="./stylesheets/about.css" rel="stylesheet">
+
+      <!-- Styling related to the "Contact Us" section -->
+      <link href="./stylesheets/contact.css" rel="stylesheet">
+
+      <title>StoryTime Productions</title>
+
+      <!-- TailWindCSS import added for quicker inline styling -->
+      <script src="https://cdn.tailwindcss.com"></script>
+
+      <!-- Flowbite related JS will be used for the navbar -->
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
+      <!-- GSAP Import to animate the cards in the About Us Section -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+      <!-- Three-Js Dependencies Required to Load main.js -->
+      <script type="importmap">
+         {
+           "imports": {
+             "three": "https://unpkg.com/three/build/three.module.js",
+             "three/addons/": "https://unpkg.com/three/examples/jsm/"
+           }
+         }
+      </script>
+
+      <!-- Three-Js Script to load the 3D Interactive Globe -->
+      <script type="module" src="./scripts/threejs/main.js"></script>
+
+      <!-- EmailJS initializer for message sending directly from the site -->
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+   </head>
+
+   <body>
+      <!-- Navbar (Mobile + Desktop) -->
+      <header id="top">
+         <a href="#" id="Logo">
+         <img id="STlogo" src="images/logo.png" alt="StoryTime Productions Logo"/>
+         </a>
+         <button id="toggleNavbarButton" onclick="toggleNavbar()" data-collapse-toggle="navbar-default" type="button">
+            <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+               <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+         </button>
+         <nav id="navbar-default">
+            <ul>
+               <li class="listItem">
+                  <a href="#home" class="nav-link">Home</a>
+               </li>
+               <li class="listItem">
+                  <a href="#portfolio" class="nav-link">Portfolio</a>
+               </li>
+               <li class="listItem">
+                  <a href="#blog" class="nav-link">Blog</a>
+               </li>
+               <li class="listItem">
+                  <a href="#about" class="nav-link">About</a>
+               </li>
+               <li class="listItem">
+                  <a href="#contact" class="nav-link">Contact</a>
+               </li>
+            </ul>
+         </nav>
+      </header>
+
+      <main id="main">
+
+         <!-- Hero Section -->
+         <section id="heroSection">
+            <video id="background-video" src="videos/Montage.mp4" autoplay loop playsinline></video>
+            <div>
+               <div class="anchorContainer">
+                  <a class="anchor" name="home"></a>
+               </div>
+               <img id="logoGif" src="images/LogoGif.gif"/>
+               <div id="heroText">
+                  <p id="h3">StoryTime Productions</p>
+                  <p id="tagline">We have a little something for everyone...</p>
+               </div>
+               <button id="heroButton">
+               <a href="#portfolio">View our Work</a>
+               </button>
+            </div>
+         </section>
+
+         <!-- Portfolio Section -->
+         <section id="portfolioSection">
+            <p id="h4">OUR WORK</p>
+            <p id="h2">Portfolio.</p>
+            <!-- Main Carousel Wrapper -->
+            <div id="default-carousel" data-carousel="static">
+               <div class="anchorContainer">
+                  <a class="anchor" name="portfolio"></a>
+               </div>
+               <!-- Carousel wrapper -->
+               <div id="carouselWrapper">
+                  <!-- Item 1 -->
+                  <div class="itemContainer" data-carousel-item>
+                     <!-- Card Front -->
+                     <div class="cardFront">
+                        <div class="anchorContainer">
+                           <img src="images/Games/ProchaineStation/ProchaineStationStills.gif" 
+                              alt="GIF" 
+                              class="stillsImage">
+                        </div>
+                        <div class="logoContainer">
+                           <div
+                              class="imageContainer">
+                              <img src="images/Games/ProchaineStation/ProchaineStationlogo.png" 
+                                 alt="Logo" 
+                                 class="gameLogo">
+                           </div>
+                           <button class="showDetailsButton" onclick="toggleCard(this)">
+                           View Details
+                           </button>
+                        </div>
+                     </div>
+                     <!-- Card Back -->
+                     <div class="cardBack">  
+                        <!-- Close Button -->
+                        <button 
+                           class="closeBackCardButton" 
+                           onclick="toggleCard(this)">
+                        X
+                        </button>
+                        <!-- Description Text -->
+                        <p class="description">
+                           Prochaine Station is a psychological horror adventure game built using the Unity Engine.
+                           <br><br>
+                           As players progress through each day, they encounter mundane tasks intermixed with increasingly bizarre and unsettling events.
+                        </p>
+                        <div class="bottomContainer">
+                           <!-- Release Date -->
+                           <p class="releaseDate">
+                              Release Date: June 2025
+                           </p>
+                           <!-- Badges -->
+                           <div class="badgeContainer">
+                              <span class="badge">Metro</span>
+                              <span class="badge">Horror</span>
+                              <span class="badge">Unity</span>
+                           </div>
+                           <!-- Bottom Buttons Section -->
+                           <div class="bottomButtonsContainer">
+                              <!-- GitHub Button -->
+                              <a href="https://github.com/StoryTime-Productions/ProchaineStation" target="_blank" class="githubButton">
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="githubImage">
+                              </a>
+                              <!-- Download Now Button -->
+                              <a href="https://github.com/StoryTime-Productions/ProchaineStation" 
+                                 target="_blank" 
+                                 class="downloadButton">
+                              Download
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Item 2 -->
+                  <div class="itemContainer" data-carousel-item> 
+                     <!-- Card Front -->
+                     <div class="cardFront">
+                        <div class="anchorContainer">
+                           <img src="images/Games/ArgonAssault/ArgonAssaultStills.gif" alt="GIF" class="stillsImage">
+                        </div>
+                        <div class="logoContainer">
+                           <div class="imageContainer">
+                              <img src="images/Games/ArgonAssault/ArgonAssaultLogo.png" alt="Logo" class="gameLogo">
+                           </div>
+                           <button class="showDetailsButton" onclick="toggleCard(this)">View Details</button>
+                        </div>
+                     </div>
+                     <!-- Card Back -->
+                     <div class="cardBack">
+                        <!-- Close Button -->
+                        <button 
+                           class="closeBackCardButton"
+                           onclick="toggleCard(this)">
+                        X
+                        </button>
+                        <!-- Description Text -->
+                        <p class="description">
+                           ArgonAssault is a 3D game developed using the Unity Engine.
+                           <br><br>
+                           This game involves using a ship and shooting down enemies using lasers, while navigating around an environment.
+                        </p>
+                        <div class="bottomContainer">
+                           <!-- Release Date -->
+                           <p class="releaseDate">
+                              Release Date: August 2024
+                           </p>
+                           <!-- Badges -->
+                           <div class="badgeContainer">
+                              <span class="badge">Space</span>
+                              <span class="badge">Sci-Fi</span>
+                              <span class="badge">Unity </span>
+                           </div>
+                           <!-- Bottom Buttons Section -->
+                           <div class="bottomButtonsContainer">
+                              <!-- GitHub Button -->
+                              <a href="https://github.com/StoryTime-Productions/ArgonAssault" target="_blank" class="githubButton">
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="githubImage">
+                              </a>
+                              <!-- Download Now Button -->
+                              <a href="https://github.com/StoryTime-Productions/ArgonAssault" target="_blank" class="downloadButton">
+                              Download
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Item 3 -->
+                  <div class="itemContainer" data-carousel-item>
+                     <!-- Card Front -->
+                     <div class="cardFront">
+                        <div class="anchorContainer">
+                           <img src="images/Games/RealmRush/RealmRushStills.gif" alt="GIF" class="stillsImage">
+                        </div>
+                        <div class="logoContainer">
+                           <div class="imageContainer">
+                              <img src="images/Games/RealmRush/RealmRushLogo.png" alt="Logo" class="gameLogo">
+                           </div>
+                           <button class="showDetailsButton" onclick="toggleCard(this)">View Details</button>
+                        </div>
+                     </div>
+                     <!-- Card Back -->
+                     <div class="cardBack">
+                        <!-- Close Button -->
+                        <button 
+                           class="closeBackCardButton"
+                           onclick="toggleCard(this)">
+                        X
+                        </button>
+                        <!-- Description Text -->
+                        <p class="description">
+                           RealmRush is a 3D game developed using the Unity Engine.
+                           <br><br>
+                           This game involves defending your tower against an enemy tower with the use of buildable crossbows.
+                        </p>
+                        <div class="bottomContainer">
+                           <!-- Release Date -->
+                           <p class="releaseDate">
+                              Release Date: August 2024
+                           </p>
+                           <!-- Badges -->
+                           <div class="badgeContainer">
+                              <span class="badge">Medieval</span>
+                              <span class="badge">Defense</span>
+                              <span class="badge">Unity</span>
+                           </div>
+                           <!-- Bottom Buttons Section -->
+                           <div class="bottomButtonsContainer">
+                              <!-- GitHub Button -->
+                              <a href="https://github.com/StoryTime-Productions/RealmRush" target="_blank" class="githubButton">
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="githubImage">
+                              </a>
+                              <!-- Download Now Button -->
+                              <a href="https://github.com/StoryTime-Productions/RealmRush" target="_blank" class="downloadButton">
+                              Download
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Item 4 -->
+                  <div class="itemContainer" data-carousel-item>
+                     <!-- Card Front -->
+                     <div class="cardFront">
+                        <div class="anchorContainer">
+                           <img src="images/Games/PackageGames/PackageGames.gif" alt="GIF" class="packageStill">
+                        </div>
+                        <div class="logoContainer">
+                           <div class="imageContainer">
+                              <img src="images/Games/PackageGames/FlappyPackage.png" alt="Logo" class="packageImage">
+                              <img src="images/Games/PackageGames/PackageClimber.png" alt="Logo" class="packageImage">
+                              <img src="images/Games/PackageGames/PackageClicker.png" alt="Logo" class="packageImage">
+                           </div>
+                           <button class="showDetailsButton" onclick="toggleCard(this)">View Details</button>
+                        </div>
+                     </div>
+                     <!-- Card Back -->
+                     <div class="cardBack">
+                        <!-- Close Button -->
+                        <button 
+                           class="closeBackCardButton"
+                           onclick="toggleCard(this)">
+                        X
+                        </button>
+                        <!-- Description Text -->
+                        <p class="description">
+                           A spin-off of well-beloved games, but with delivery packages instead.
+                           <br><br>
+                           This project was made for a client developing a Delivery/Courier web application.
+                        </p>
+                        <div class="bottomContainer">
+                           <!-- Release Date -->
+                           <p class="releaseDate">
+                              Release Date: June 2025
+                           </p>
+                           <!-- Badges -->
+                           <div class="badgeContainer">
+                              <span class="badge">Package</span>
+                              <span class="badge">Arcade</span>
+                              <span class="badge">Unity</span>
+                           </div>
+                           <!-- Bottom Buttons Section -->
+                           <div class="bottomButtonsContainer">
+                              <!-- GitHub Button -->
+                              <a href="https://github.com/StoryTime-Productions/PackageGames" target="_blank" class="githubButton">
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="githubImage">
+                              </a>
+                              <!-- Download Now Button -->
+                              <a href="https://github.com/StoryTime-Productions/PackageGames" target="_blank" class="downloadButton">
+                              Download
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Item 5 -->
+                  <div class="itemContainer" data-carousel-item>
+                     <!-- Card Front -->
+                     <div class="cardFront">
+                        <div class="anchorContainer">
+                           <img src="images/Games/ZombieRunner/ZombieRunnerStills.gif" alt="GIF" class="stillsImage" >
+                        </div>
+                        <div class="logoContainer">
+                           <div class="imageContainer">
+                              <img src="images/Games/ZombieRunner/ZombieRunnerLogo.png" alt="Logo" class="gameLogo">
+                           </div>
+                           <button class="showDetailsButton" onclick="toggleCard(this)">View Details</button>
+                        </div>
+                     </div>
+                     <!-- Card Back -->
+                     <div class="cardBack">
+                        <!-- Close Button -->
+                        <button 
+                           class="closeBackCardButton"
+                           onclick="toggleCard(this)">
+                        X
+                        </button>
+                        <!-- Description Text -->
+                        <p class="description">
+                           Zombie Runner is a game developed using the Unity Engine.
+                           <br><br>
+                           The game involves surviving a horde of zombies using an array of weapons to defend yourself.
+                        </p>
+                        <div class="bottomContainer">
+                           <!-- Release Date -->
+                           <p class="releaseDate">
+                              Release Date: June 2025
+                           </p>
+                           <!-- Badges -->
+                           <div class="badgeContainer">
+                              <span class="badge">Metro</span>
+                              <span class="badge">Horror</span>
+                              <span class="badge">Unity</span>
+                           </div>
+                           <!-- Bottom Buttons Section -->
+                           <div class="bottomButtonsContainer">
+                              <!-- GitHub Button -->
+                              <a href="https://github.com/StoryTime-Productions/ZombieRunner" target="_blank" class="githubButton">
+                                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="githubImage">
+                              </a>
+                              <!-- Download Now Button -->
+                              <a href="https://github.com/StoryTime-Productions/ZombieRunner" target="_blank" class="downloadButton">
+                              Download
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Slider indicators -->
+                  <div id="portfolioControls">
+                     <button type="button" class="ellipse" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                     <button type="button" class="ellipse" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                     <button type="button" class="ellipse" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                     <button type="button" class="ellipse" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                     <button type="button" class="ellipse" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                     <!-- Slider controls -->
+                     <button id="back" type="button" data-carousel-prev>
+                        <span class="arrowContainer">
+                           <svg class="arrowButton" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                              <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                           </svg>
+                           <span class="sr-only">Previous</span>
+                        </span>
+                     </button>
+                     <button id="go" type="button" data-carousel-next>
+                        <span class="arrowContainer">
+                           <svg class="arrowButton" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                              <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                           </svg>
+                           <span class="sr-only">Next</span>
+                        </span>
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         <!-- Blog Section -->
+         <section id="blogSection">
+            <p id="h4">BEHIND THE SCREEN</p>
+            <p id="h2"><span>./dev</span> Blog.</p>
+            <!-- Blog Cards Container -->
+            <div id="blogContainer">
+               <div class="anchorContainer">
+                  <a class="anchor" name="blog"></a>
+               </div>
+               <!-- Placeholder for blog posts -->
+            </div>
+         </section>
+
+         <!-- About Section -->
+         <section id="aboutUsSection">
+            <p id="h4">OUR BACKSTORY</p>
+            <p id="h2">About Us.</p>
+
+            <div class="anchorContainer">
+               <a class="anchor" name="about"></a>
+            </div>
+
+            <!-- Row of Cards -->
+            <div id="cardRow">
+               <!-- Card 1 -->
+               <div class="card">
+                     <img src="images/AboutUs/Location.png" class="cardImage" alt="Image 1">
+                     <div class="cardContent">
+                        <h5 class="cardTitle">Where?</h5>
+                        <p class="cardDescription">We are based in the French province of Canada, Quebec, floating on a little island called Montreal.</p>
+                     </div>
+               </div>
+
+               <!-- Card 2 -->
+               <div class="card">
+                     <img src="images/AboutUs/Education.png" class="cardImage" alt="Image 2">
+                  <div class="cardContent">
+                     <h5 class="cardTitle">What?</h5>
+                     <p class="cardDescription">We are students with a wide range of skills from engineering, computational arts, multimedia specialists, etc.</p>
+                  </div>
+               </div>
+
+               <!-- Card 3 -->
+               <div class="card">
+                     <img src="images/AboutUs/WhyWeDoDis.png" class="cardImage" alt="Image 3">
+                  <div class="cardContent">
+                     <h5 class="cardTitle">Why?</h5>
+                     <p class="cardDescription">We've always grown up with PC and Console gaming, and want to create our experiences.</p>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+         <!-- Contact Section -->
+         <section id="contactUsSection">
+            <p id="h4">LET'S KEEP IN TOUCH</p>
+            <p id="h2">Contact Us.</p>
+
+            <div class="anchorContainer">
+               <a class="anchor" name="contact"></a>
+            </div>
+
+            <div id="aboutContainer">
+               <div id="three-container">
+               </div>
+               <form id="contact-form" class="contactForm">
+                  <div class="formGroup">
+                     <label for="name" class="formLabel">Your Name</label>
+                     <input type="text" id="name" name="name" placeholder="Enter your name" class="formInput" required>
+                  </div>
+                  <div class="formGroup">
+                     <label for="email" class="formLabel">Your Email</label>
+                     <input type="email" id="email" name="email" placeholder="Enter your email" class="formInput" required>
+                  </div>
+                  <div class="formGroup">
+                     <label for="message" class="formLabel">Message</label>
+                     <textarea id="message" name="message" placeholder="Enter your message" rows="5" class="formTextarea" required></textarea>
+                  </div>
+                  <button type="submit" class="submitButton">Send Message</button>
+               </form>
+            </div>
+         </section>
+      </main>
+      
+      <!-- Footer -->
+      <footer class="footer">
+         <p>StoryTime Productions © 2024</p>
+      </footer>
+   </body>
+
+   <!-- Script to animate the cards in the "About Us" section using the GSAP animation library -->
+   <script type="text/javascript" src="./scripts/about-us-cards.js"></script>
+
+   <!-- Script to send a message directly to StoryTime Productions' email from the website -->
+   <script type="text/javascript" src="./scripts/emailjs-script.js"></script>
+
+   <!-- Script that handles showing the navigation menu in mobile -->
+   <script type="text/javascript" src="./scripts/navbar.js"></script>
+
+   <!-- Script that handles showing the front and back of cards in mobile for the "Portfolio" section -->
+   <script type="text/javascript" src="./scripts/portfolio.js"></script>
+
+   <!-- Script that handles the loading of the blog entry previews -->
+   <script type="text/javascript" src="./scripts/previewText.js"></script>
+   
+</html>
