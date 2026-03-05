@@ -1,16 +1,16 @@
 nav a {
 	font-family: "Inter", sans-serif;
 	font-optical-sizing: auto;
-	font-weight: 900;
+	font-weight: 600;
 	font-style: normal;
-	font-size: 20px;
+	font-size: 0.9375rem;
 }
 
 .nav-link {
 	text-decoration: none;
-	color: white;
+	color: rgba(255, 255, 255, 0.75);
 	position: relative;
-	transition: color 0.3s ease;
+	transition: color 0.2s ease;
 	border-radius: 0.375rem;
 	border-bottom-width: 2px;
 	border-color: transparent;
@@ -27,8 +27,8 @@ nav a {
 	content: '';
 	position: absolute;
 	width: 0;
-	height: 2px;
-	background-color: white;
+	height: 1px;
+	background-color: var(--secondary);
 	transition: width 0.3s ease;
 }
 
@@ -52,6 +52,7 @@ nav a {
 }
 
 .nav-link:hover {
+	color: white;
 	border-bottom: none;
 }
 
@@ -61,15 +62,20 @@ nav a {
 
 #navbar-default {
 	display: none;
-	border-radius: 0.5rem;
+	border-radius: 0.625rem;
 	width: 100%;
-	background: var(--primary);
+	background: rgba(17, 12, 16, 0.95);
+	border: 1px solid var(--border);
+	margin-top: 0.5rem;
 }
 
 @media (min-width: 768px) {
 	#navbar-default {
 		display: block;
 		width: auto;
+		background: transparent;
+		border: none;
+		margin-top: 0;
 	}
 }
 
@@ -87,10 +93,11 @@ nav a {
 
 #navbar-default ul {
 	display: flex;
-	padding: 1rem;
+	padding: 0.75rem;
 	flex-direction: column;
 	align-items: center;
 	font-weight: 500;
+	gap: 0.125rem;
 }
 
 @media (min-width: 768px) {
@@ -99,26 +106,33 @@ nav a {
 		margin-left: 2rem;
 		flex-direction: row;
 		border-width: 0;
+		gap: 0;
 	}
 }
 
 .listItem {
-	padding: 0.5rem;
-	border-radius: 0.375rem;
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
 	width: 100%;
-	margin-top: 1rem;
+	margin-top: 0;
 	margin-right: 0;
 	text-align: center;
-	background: var(--secondary-dark);
+	background: transparent;
+	transition: background-color 0.2s ease;
+}
+
+.listItem:hover {
+	background-color: rgba(114, 89, 118, 0.15);
 }
 
 @media (min-width: 768px) {
 	.listItem {
-		border-radius: 0;
+		border-radius: 0.375rem;
 		width: auto;
 		background-color: transparent;
 		margin-top: 0;
-		margin-right: 1rem;
+		margin-right: 0.25rem;
+		padding: 0.375rem 0.75rem;
 	}
 }
 
@@ -130,11 +144,14 @@ nav a {
 	justify-content: space-between;
 	margin-left: auto;
 	margin-right: auto;
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
-	padding-top: 0.75rem;
-	padding-bottom: 0.75rem;
-	background-color: var(--primary);
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+	padding-top: 0.875rem;
+	padding-bottom: 0.875rem;
+	background-color: rgba(17, 12, 16, 0.75);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border-bottom: 1px solid var(--border);
 	position: fixed;
 	z-index: 999;
 }
@@ -154,15 +171,21 @@ nav a {
 #toggleNavbarButton {
 	display: inline-flex;
 	padding: 0.5rem;
-	margin-right: 2rem;
+	margin-right: 1.5rem;
 	justify-content: center;
 	align-items: center;
 	border-radius: 0.5rem;
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 2.25rem;
+	height: 2.25rem;
 	font-size: 0.875rem;
 	line-height: 1.25rem;
-	color: var(--surface-dark)
+	color: white;
+	border: 1px solid var(--border);
+	transition: background-color 0.2s ease;
+}
+
+#toggleNavbarButton:hover {
+	background-color: rgba(114, 89, 118, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -172,6 +195,6 @@ nav a {
 }
 
 #hamburger {
-	width: 1.25rem;
-	height: 1.25rem;
+	width: 1.1rem;
+	height: 1.1rem;
 }

@@ -9,8 +9,8 @@ const container = document.getElementById('three-container');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.01, 1000);
 
-// Set the background color
-scene.background = new THREE.Color('#1d141c'); // Replace with your desired hex code
+// Set the background color to match the page surface (--surface in global.css)
+scene.background = new THREE.Color('#110c10');
 
 // Create the renderer
 const renderer = new THREE.WebGLRenderer();

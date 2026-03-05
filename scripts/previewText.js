@@ -1,101 +1,69 @@
-// Function to get a truncated preview of the content based on screen size
-function getPreview(content, mobile, desktop) {
-    // Determine the character limit based on screen width
-    const limit = window.innerWidth < 768 ? mobile : desktop;
+// Loads the 2 most recent blog posts and renders preview cards in #blogContainer on the main page.
 
-    // If content length is less than or equal to the limit, return it as is
-    if (content.length <= limit) {
-        return content;
-    }
-
-    // Truncate the content to the specified limit
-    let truncated = content.substring(0, limit);
-
-    // Find the last space in the truncated content to avoid cutting words in half
-    const lastSpaceIndex = truncated.lastIndexOf(' ');
-
-    // If there's a space, truncate content at the last full word
-    if (lastSpaceIndex !== -1) {
-        truncated = truncated.substring(0, lastSpaceIndex);
-    }
-
-    // Append '...' to indicate that the content has been truncated
-    return truncated + '...';
+function formatDate(dateStr) {
+    return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-// Function to format a date string into a readable format
-function formatDate(dateString) {
-    // Create a new Date object from the provided date string
-    const date = new Date(dateString);
-
-    // Define the formatting options (year, short month, and day)
-    const options = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    };
-
-    // Return the formatted date as a string
-    return date.toLocaleDateString('en-US', options);
+function getPreview(text, mobileLimit = 100, desktopLimit = 180) {
+    const limit = window.innerWidth < 768 ? mobileLimit : desktopLimit;
+    if (text.length <= limit) return text;
+    const truncated = text.substring(0, text.lastIndexOf(' ', limit));
+    return (truncated || text.substring(0, limit)) + '...';
 }
 
-// Fetch blog post data from the given URL
-fetch('https://storytime-productions.github.io/blog/posts.json')
-    .then(response => response.json()) // Parse the JSON response
-    .then(data => {
-        // Get the container element where blog posts will be displayed
-        const blogContainer = document.getElementById('blogContainer');
+async function loadBlogPreviews() {
+    const container = document.getElementById('blogContainer');
+    if (!container) return;
 
-        // Slice the first 3 posts to display
-        const latestPosts = data.slice(0, 3);
+    try {
+        const listRes = await fetch('./blog/posts-list.json');
+        const postIds = await listRes.json();
 
-        // Iterate through each post and create a blog card
-        latestPosts.forEach(post => {
-            // Set the HTML link for each post
-            post.html = "https://storytime-productions.github.io/blog";
+        const posts = [];
+        for (const id of postIds) {
+            try {
+                const res = await fetch(`./blog/posts/${id}.json`);
+                if (res.ok) posts.push(await res.json());
+            } catch { /* skip */ }
+        }
 
-            // Create the blog card element for each post
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const preview = posts.slice(0, 2);
+
+        // Remove placeholder anchor, keep it
+        const anchor = container.querySelector('.anchorContainer');
+
+        preview.forEach(post => {
             const card = document.createElement('div');
-            card.classList.add('blogCard'); // Add a CSS class for styling
-
-            // Create the inner HTML content for the card, including title, preview, and date
-            const cardContent = `
+            card.className = 'blogCard';
+            card.innerHTML = `
                 <div class="post-container">
                     <div class="post-title-content">
                         <p class="post-title">${post.title}</p>
-                        <p class="post-preview">${getPreview(post.content, 30, 120)}</p> <!-- Display preview -->
+                        <p class="post-preview">${getPreview(post.description)}</p>
                     </div>
-
                     <div class="post-date-readmore">
                         <div class="post-date-container">
-                            <p class="post-date">${formatDate(post.date)}</p> <!-- Format the post date -->
-                            <button class="read-more-btn" onclick="window.location.href='${post.html}?title=${encodeURIComponent(post.title)}'">Read More</button>
+                            <p class="post-date">${formatDate(post.date)}</p>
                         </div>
+                        <a href="./blog/post.html?id=${post.id}">
+                            <button class="read-more-btn">Read More &rarr;</button>
+                        </a>
                     </div>
                 </div>
             `;
-
-            // Insert the card content into the card div
-            card.innerHTML = cardContent;
-
-            // Append the created card to the blog container
-            blogContainer.appendChild(card);
+            container.appendChild(card);
         });
 
-        // Add a "View All" button to the end of the posts
-        const viewAllButton = document.createElement('a');
-        viewAllButton.href = "https://storytime-productions.github.io/blog"; // Link to the full blog page
-        viewAllButton.id = 'buttonContainer';
-        viewAllButton.innerHTML = `
-            <button class="view-posts-button">
-                View All
-            </button>
-        `;
+        // View all posts button
+        const btnWrap = document.createElement('div');
+        btnWrap.id = 'buttonContainer';
+        btnWrap.innerHTML = `<a href="./blog/index.html"><button class="view-posts-button">View All Posts &rarr;</button></a>`;
+        container.appendChild(btnWrap);
 
-        // Append the "View All" button to the blog container
-        blogContainer.appendChild(viewAllButton);
-    })
-    .catch(error => {
-        // Log any errors that occur during the fetch request
-        console.error('Error fetching blog posts:', error);
-    });
+    } catch (err) {
+        console.error('Failed to load blog previews:', err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadBlogPreviews);

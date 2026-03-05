@@ -1,0 +1,32 @@
+{
+    "id": "studio-introduction",
+    "title": "Who the hell are we?",
+    "description": "An honest answer to the only question worth asking before you read anything else we ever write.",
+    "date": "2026-03-04",
+    "content": [
+        {
+            "type": "paragraph",
+            "text": "We've asked it ourselves more times than we can count. Most studios write an introduction to tell you how great they are. We're writing this one to be straight with you, with minimal fluff."
+        },
+        {
+            "type": "paragraph",
+            "text": "We are StoryTime Productions. A small group of young people who met through a shared obsession with games: playing them, pulling them apart, arguing about them, and eventually deciding that making them was the only logical next step. Not because we had some grand plan. Because we couldn't stop asking questions and games were the only medium that asked them back."
+        },
+        {
+            "type": "paragraph",
+            "text": "What draws us together isn't a genre or a tool or a style. It's something more uncomfortable than that. It's the need to make people <em>feel</em> something, to recreate the exact sensation of being hit by a piece of art you didn't expect to hit you. The FOMO of a world you weren't born into. The catharsis of going through someone else's hardship at a safe distance. The desperate wish to immortalize something, or to burn it to the ground so it can't hurt you anymore. That's the engine. That's always been the engine."
+        },
+        {
+            "type": "paragraph",
+            "text": "We chase that through whatever medium fits: story-based games, arcade minigames, video skits, streams, commissioned art, tutorials. Not because we've mastered any of them, but because we're students in the truest sense: we want to learn, we want to share what we learn, and we want to build something together that outlasts the moment we made it. The compensation is secondary. The technology will evolve. What we're after is the experience, for us, and for anyone willing to come along."
+        },
+        {
+            "type": "paragraph",
+            "text": "This blog is part of that. Honest writing about what we're building, why we're building it, and what breaks along the way. No filler, no corporate voice, no pretending we have it figured out. Just the work, and the thinking behind it."
+        },
+        {
+            "type": "paragraph",
+            "text": "The engine has started. The boat has set sail. The butterfly's wings have started flapping. We have no idea where this will take us, but it's worth giving a shot."
+        }
+    ]
+}

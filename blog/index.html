@@ -1,21 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>./dev Blog</title>
-    <link rel="stylesheet" href="style.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>./dev Blog — StoryTime Productions</title>
+
+   <meta name="description" content="Behind the screen insights from the StoryTime Productions game dev team.">
+
+   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+   <link href="../stylesheets/global.css" rel="stylesheet">
+   <link href="../stylesheets/navbar.css" rel="stylesheet">
+   <link href="style.css" rel="stylesheet">
+
+   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>./dev Blog</h1>
-        <p>Welcome to the ./dev Blog! Read the latest posts below.</p>
-    </header>
 
-    <section id="posts">
-        <!-- Blog posts will be appended here dynamically -->
-    </section>
+   <!-- Navbar -->
+   <header id="top">
+      <a href="../" id="Logo">
+         <img id="STlogo" src="../images/logo.png" alt="StoryTime Productions Logo"/>
+      </a>
+      <button id="toggleNavbarButton" onclick="toggleNavbar()" data-collapse-toggle="navbar-default" type="button">
+         <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+         </svg>
+      </button>
+      <nav id="navbar-default">
+         <ul>
+            <li class="listItem"><a href="../" class="nav-link">Home</a></li>
+            <li class="listItem"><a href="../#portfolio" class="nav-link">Portfolio</a></li>
+            <li class="listItem"><a href="./index.html" class="nav-link">Blog</a></li>
+            <li class="listItem"><a href="../#about" class="nav-link">About</a></li>
+            <li class="listItem"><a href="../#contact" class="nav-link">Contact</a></li>
+         </ul>
+      </nav>
+   </header>
 
-    <script src="script.js"></script>
+   <main id="main">
+      <section id="blogPageSection">
+         <p id="h4">BEHIND THE SCREEN</p>
+         <p id="h2"><span>./dev</span> Blog.</p>
+
+         <div id="blogSearch">
+            <svg xmlns="http://www.w3.org/2000/svg" id="searchIcon" viewBox="0 0 20 20" fill="none">
+               <circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.5"/>
+               <path d="M13 13L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="Search posts..." autocomplete="off" />
+         </div>
+
+         <div id="blogContainer">
+            <!-- Populated by script.js -->
+         </div>
+      </section>
+   </main>
+
+   <footer class="footer">
+      <p>StoryTime Productions &copy; <span id="copyright-year"></span></p>
+   </footer>
+
+   <script src="../scripts/navbar.js"></script>
+   <script src="script.js"></script>
+   <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

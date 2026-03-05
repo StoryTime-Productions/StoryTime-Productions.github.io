@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>./dev Blog — StoryTime Productions</title>
+
+   <meta name="description" content="StoryTime Productions dev blog post.">
+
+   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+   <link href="../stylesheets/global.css" rel="stylesheet">
+   <link href="../stylesheets/navbar.css" rel="stylesheet">
+   <link href="style.css" rel="stylesheet">
+
+   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</head>
+<body>
+
+   <!-- Navbar -->
+   <header id="top">
+      <a href="../" id="Logo">
+         <img id="STlogo" src="../images/logo.png" alt="StoryTime Productions Logo"/>
+      </a>
+      <button id="toggleNavbarButton" onclick="toggleNavbar()" data-collapse-toggle="navbar-default" type="button">
+         <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+         </svg>
+      </button>
+      <nav id="navbar-default">
+         <ul>
+            <li class="listItem"><a href="../" class="nav-link">Home</a></li>
+            <li class="listItem"><a href="../#portfolio" class="nav-link">Portfolio</a></li>
+            <li class="listItem"><a href="./index.html" class="nav-link">Blog</a></li>
+            <li class="listItem"><a href="../#about" class="nav-link">About</a></li>
+            <li class="listItem"><a href="../#contact" class="nav-link">Contact</a></li>
+         </ul>
+      </nav>
+   </header>
+
+   <main id="main">
+      <div id="postPage">
+         <a href="./index.html" id="backToBlog">← Back to Blog</a>
+         <article id="postContainer">
+            <!-- Populated by script -->
+         </article>
+      </div>
+   </main>
+
+   <footer class="footer">
+      <p>StoryTime Productions &copy; <span id="copyright-year"></span></p>
+   </footer>
+
+   <script src="../scripts/navbar.js"></script>
+   <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
+
+   <script>
+      // ---- Utilities ----
+      function parseMarkdown(text) {
+         text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+         text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+         text = text.replace(/~~(.*?)~~/g, '<del>$1</del>');
+         text = text.replace(/`(.*?)`/g, '<code>$1</code>');
+         return text;
+      }
+
+      function formatDate(dateStr) {
+         return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      function calcReadingTime(post) {
+         let words = 0;
+         post.content.forEach(item => {
+            if (item.type === 'paragraph') words += item.text.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length;
+            if (item.type === 'list') item.items.forEach(i => words += i.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length);
+         });
+         return Math.max(1, Math.ceil(words / 225));
+      }
+
+      function imgSrc(src, postId) {
+         if (!src) return '';
+         if (src.startsWith('http')) return src;
+         if (src.startsWith('images/')) return src;
+         return `images/${postId}/${src}`;
+      }
+
+      // ---- Renderers ----
+      function renderContent(post) {
+         const container = document.getElementById('postContainer');
+
+         // Header
+         const header = document.createElement('div');
+         header.className = 'post-header';
+         header.innerHTML = `
+            <h1 class="post-page-title">${post.title}</h1>
+            <p class="post-page-meta">${formatDate(post.date)} &nbsp;·&nbsp; ${calcReadingTime(post)} min read</p>
+         `;
+         container.appendChild(header);
+
+         // Content blocks
+         post.content.forEach(item => {
+            if (item.type === 'paragraph') {
+               const p = document.createElement('p');
+               p.className = 'post-body-paragraph';
+               p.innerHTML = parseMarkdown(item.text);
+               container.appendChild(p);
+
+            } else if (item.type === 'list') {
+               const ul = document.createElement('ul');
+               ul.className = 'post-body-list';
+               item.items.forEach(text => {
+                  const li = document.createElement('li');
+                  li.innerHTML = parseMarkdown(text);
+                  ul.appendChild(li);
+               });
+               container.appendChild(ul);
+
+            } else if (item.type === 'image') {
+               const wrap = document.createElement('div');
+               wrap.className = `post-media-wrap align-${item.align || 'center'}`;
+               const img = document.createElement('img');
+               img.src = imgSrc(item.src, post.id);
+               img.alt = item.alt || '';
+               img.className = 'post-media-img';
+               wrap.appendChild(img);
+               if (item.caption || item.alt) {
+                  const cap = document.createElement('p');
+                  cap.className = 'post-media-caption';
+                  cap.innerHTML = parseMarkdown(item.caption || item.alt);
+                  wrap.appendChild(cap);
+               }
+               container.appendChild(wrap);
+
+            } else if (item.type === 'video') {
+               const wrap = document.createElement('div');
+               wrap.className = `post-media-wrap align-${item.align || 'center'}`;
+               const vid = document.createElement('video');
+               vid.src = imgSrc(item.src, post.id);
+               vid.autoplay = true;
+               vid.loop = true;
+               vid.muted = true;
+               vid.controls = true;
+               vid.className = 'post-media-img';
+               wrap.appendChild(vid);
+               if (item.alt) {
+                  const cap = document.createElement('p');
+                  cap.className = 'post-media-caption';
+                  cap.innerHTML = parseMarkdown(item.alt);
+                  wrap.appendChild(cap);
+               }
+               container.appendChild(wrap);
+
+            } else if (item.type === 'iframe') {
+               const wrap = document.createElement('div');
+               wrap.className = 'post-media-wrap align-center';
+               const frame = document.createElement('iframe');
+               frame.src = item.src;
+               frame.width = item.width || '100%';
+               frame.height = item.height || '400px';
+               frame.frameBorder = '0';
+               frame.allowFullscreen = true;
+               frame.className = 'post-iframe';
+               if (item.title) frame.title = item.title;
+               wrap.appendChild(frame);
+               if (item.alt) {
+                  const cap = document.createElement('p');
+                  cap.className = 'post-media-caption';
+                  cap.innerHTML = parseMarkdown(item.alt);
+                  wrap.appendChild(cap);
+               }
+               container.appendChild(wrap);
+            }
+         });
+      }
+
+      // ---- Load post ----
+      async function loadPost() {
+         const id = new URLSearchParams(window.location.search).get('id');
+         if (!id) {
+            document.getElementById('postContainer').innerHTML = '<p style="color:var(--muted-foreground)">No post specified.</p>';
+            return;
+         }
+         try {
+            const res = await fetch(`posts/${id}.json`);
+            if (!res.ok) throw new Error('Not found');
+            const post = await res.json();
+            document.title = `${post.title} — ./dev Blog`;
+            renderContent(post);
+         } catch (e) {
+            document.getElementById('postContainer').innerHTML = '<p style="color:var(--muted-foreground)">Post not found.</p>';
+         }
+      }
+
+      document.addEventListener('DOMContentLoaded', loadPost);
+   </script>
+</body>
+</html>

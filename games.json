@@ -1,0 +1,94 @@
+{
+    "games": [
+        {
+            "still": "images/Games/ProchaineStation/ProchaineStationStills.gif",
+            "stillClass": "stillsImage",
+            "logo": "images/Games/ProchaineStation/ProchaineStationlogo.png",
+            "description": "Prochaine Station is a psychological horror adventure game built using the Unity Engine.<br><br>As players progress through each day, they encounter mundane tasks intermixed with increasingly bizarre and unsettling events.",
+            "releaseDate": "TBD",
+            "badges": [
+                "Metro",
+                "Horror",
+                "Unity"
+            ],
+            "githubUrl": "https://github.com/StoryTime-Productions/ProchaineStation",
+            "comingSoon": true
+        },
+        {
+            "still": "images/Games/PackageGames/PackageGames.gif",
+            "stillClass": "packageStill",
+            "logos": [
+                {
+                    "src": "images/Games/PackageGames/FlappyPackage.png",
+                    "class": "packageImage"
+                },
+                {
+                    "src": "images/Games/PackageGames/PackageClimber.png",
+                    "class": "packageImage"
+                },
+                {
+                    "src": "images/Games/PackageGames/PackageClicker.png",
+                    "class": "packageImage"
+                }
+            ],
+            "description": "A spin-off of well-beloved games, but with delivery packages instead.<br><br>This project was made for a client developing a Delivery/Courier web application.",
+            "releaseDate": "June 2025",
+            "badges": [
+                "Package",
+                "Arcade",
+                "Unity"
+            ],
+            "githubUrl": "https://github.com/StoryTime-Productions/PackageGames",
+            "downloadUrl": "https://github.com/StoryTime-Productions/PackageGames",
+            "downloadLabel": "Download"
+        },
+        {
+            "still": "images/Games/Sailcore/Sailcore.png",
+            "stillClass": "stillsImage",
+            "logo": "images/Games/Sailcore/SailcoreLogo.png",
+            "description": "Sailcore is a pirate-themed survival game where players fight off waves of supernatural enemies while keeping their ship afloat.",
+            "releaseDate": "TBD",
+            "badges": [
+                "Survival",
+                "Multiplayer",
+                "First-Person"
+            ],
+            "githubUrl": "https://github.com/StoryTime-Productions/Sailcore",
+            "comingSoon": true
+        },
+        {
+            "still": "images/Games/LabyrinthOfSorrows/LoS.png",
+            "stillClass": "stillsImage",
+            "logo": "images/Games/LabyrinthOfSorrows/LabyrinthOfSorrowsLogo.png",
+            "description": "A short 2D-maze game in which you collect keys to unlock rooms and outsmart enemies.",
+            "releaseDate": "December 2023",
+            "badges": [
+                "Horror",
+                "Puzzle",
+                "2D"
+            ],
+            "githubUrl": "https://github.com/StoryTime-Productions/labyrinthofsorrows",
+            "downloadUrl": "https://labyrinth-of-sorrows.vercel.app/",
+            "downloadLabel": "Play Now"
+        },
+        {
+            "stills": [
+                "images/Games/NugRunGun/NugRunGun1.png",
+                "images/Games/NugRunGun/NugRunGun2.png",
+                "images/Games/NugRunGun/NugRunGun3.png"
+            ],
+            "stillClass": "stillsImage",
+            "logo": "images/Games/NugRunGun/NugRunGunLogo.png",
+            "description": "A Unity Engine project. Shoot food as a nugget with sick DnB tracks",
+            "releaseDate": "August 2025",
+            "badges": [
+                "Arcade",
+                "Top-Down",
+                "Unity"
+            ],
+            "githubUrl": "https://github.com/StoryTime-Productions/NugRunGun",
+            "downloadUrl": "https://storytime-productions.itch.io/nugrungun",
+            "downloadLabel": "Download"
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 #contactUsSection {
 	padding: 1.25rem;
-	margin-bottom: 10rem;
+	margin-bottom: 5rem;
 }
 
 @media (min-width: 768px) {
@@ -41,17 +41,18 @@
 
 #contactForm input::placeholder,
 #contactForm textarea::placeholder {
-	color: black;
-	opacity: 50%
+	color: var(--muted-foreground);
+	opacity: 1;
 }
 
 .contactForm {
 	width: 86%;
-	background-color: var(--primary);
-	padding: 1rem;
+	background-color: var(--card);
+	border: 1px solid var(--border);
+	padding: 1.5rem;
 	display: block;
-	border-radius: 10px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 0.75rem;
+	box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 
 @media (min-width: 640px) {
@@ -78,23 +79,29 @@
 
 .formLabel {
 	display: block;
-	color: white;
-	font-weight: bold;
+	color: rgba(255, 255, 255, 0.85);
+	font-weight: 500;
+	font-size: 0.875rem;
 	margin-bottom: 0.5rem;
 }
 
 .formInput,
 .formTextarea {
 	width: 100%;
-	padding: 0.5rem 1rem;
-	background-color: var(--secondary);
-	color: black;
-	border-radius: 0.375rem;
+	padding: 0.5rem 0.875rem;
+	background-color: rgba(17, 12, 16, 0.6);
+	color: white;
+	border: 1px solid var(--border-strong);
+	border-radius: 0.5rem;
 	outline: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	font-size: 0.875rem;
 }
 
 .formInput:focus,
 .formTextarea:focus {
+	border-color: var(--primary);
+	box-shadow: 0 0 0 3px var(--ring);
 	outline: none;
 }
 
@@ -104,16 +111,19 @@
 
 .submitButton {
 	width: 100%;
-	background-color: var(--secondary);
-	color: black;
-	font-weight: bold;
-	padding: 0.5rem 1rem;
-	border-radius: 0.375rem;
-	transition: background-color 0.3s ease;
+	background-color: var(--secondary-dark);
+	color: white;
+	font-weight: 600;
+	font-size: 0.875rem;
+	padding: 0.5625rem 1rem;
+	border-radius: 0.5rem;
+	border: 1px solid var(--border-strong);
+	transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .submitButton:hover {
-	background-color: var(--primary-light);
+	background-color: var(--primary);
+	border-color: var(--primary);
 }
 
 #three-container {

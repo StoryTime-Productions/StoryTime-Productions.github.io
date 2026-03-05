@@ -1,68 +1,75 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const postsContainer = document.getElementById("posts");
-    const postForm = document.getElementById("new-post-form");
+let allPosts = [];
 
-    // Fetch existing posts from posts.json and display them
-    fetch("posts.json")
-        .then(response => response.json())
-        .then(posts => {
-            posts.forEach(post => {
-                displayPost(post);
-            });
-        })
-        .catch(error => console.error("Error fetching posts:", error));
+function formatDate(dateStr) {
+    return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
 
-    // Handle the form submission
-    postForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+function buildBlogCard(post) {
+    const card = document.createElement('a');
+    card.className = 'blogCard';
+    card.href = `post.html?id=${post.id}`;
+    card.innerHTML = `
+        <div class="post-card-inner">
+            <div class="post-card-text">
+                <p class="post-title">${post.title}</p>
+                <p class="post-preview">${post.description}</p>
+            </div>
+            <p class="post-date">${formatDate(post.date)}</p>
+        </div>
+    `;
+    return card;
+}
 
-        const title = document.getElementById("title").value;
-        const content = document.getElementById("content").value;
-
-        // Create a new post object
-        const newPost = {
-            title,
-            content,
-            date: new Date().toLocaleDateString()
-        };
-
-        // Save the new post in the posts.json (simulated for this static file)
-        fetch("posts.json", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newPost)
-        })
-        .then(response => response.json())
-        .then(post => {
-            // Display the new post
-            displayPost(post);
-
-            // Reset form inputs
-            postForm.reset();
-        })
-        .catch(error => console.error("Error adding post:", error));
-    });
-
-    // Function to display a post on the page
-    function displayPost(post) {
-        const postDiv = document.createElement("div");
-        postDiv.classList.add("post");
-
-        const postTitle = document.createElement("h3");
-        postTitle.textContent = post.title;
-
-        const postDate = document.createElement("p");
-        postDate.textContent = `Published on: ${post.date}`;
-
-        const postContent = document.createElement("p");
-        postContent.textContent = post.content;
-
-        postDiv.appendChild(postTitle);
-        postDiv.appendChild(postDate);
-        postDiv.appendChild(postContent);
-
-        postsContainer.appendChild(postDiv);
+function renderPosts(posts) {
+    const container = document.getElementById('blogContainer');
+    container.innerHTML = '';
+    if (posts.length === 0) {
+        container.innerHTML = '<p class="blog-empty">No posts match your search.</p>';
+        return;
     }
-});
+    posts.forEach(post => container.appendChild(buildBlogCard(post)));
+}
+
+function handleSearch() {
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    if (!query) {
+        renderPosts(allPosts);
+        return;
+    }
+    const filtered = allPosts.filter(p =>
+        p.title.toLowerCase().includes(query) ||
+        p.description.toLowerCase().includes(query)
+    );
+    renderPosts(filtered);
+}
+
+async function loadBlogPage() {
+    const container = document.getElementById('blogContainer');
+    try {
+        const listRes = await fetch('posts-list.json');
+        const postIds = await listRes.json();
+
+        for (const id of postIds) {
+            try {
+                const res = await fetch(`posts/${id}.json`);
+                if (res.ok) allPosts.push(await res.json());
+            } catch { /* skip */ }
+        }
+
+        allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (allPosts.length === 0) {
+            container.innerHTML = '<p class="blog-empty">No posts yet. Check back soon.</p>';
+            return;
+        }
+
+        renderPosts(allPosts);
+
+        document.getElementById('searchInput').addEventListener('input', handleSearch);
+    } catch (err) {
+        console.error('Failed to load blog posts:', err);
+        container.innerHTML = '<p class="blog-empty">Failed to load posts.</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadBlogPage);
